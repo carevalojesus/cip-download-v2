@@ -1,0 +1,105 @@
+---
+const links = [
+  { name: 'Inicio', href: '/' },
+  { name: 'Eventos', href: '/eventos' },
+  { name: 'Servicios', href: '#' },
+  { name: 'Nosotros', href: '#' },
+  { name: 'Contacto', href: '#' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="border-b">
+  <div class="container mx-auto px-4 py-4">
+    <div class="flex items-center justify-between">
+      <a href="/" class="flex items-center gap-4">
+        <img
+          src="/src/assets/cip-cdl.svg"
+          alt="Colegio de Ingenieros del Perú - Consejo Departamental de Loreto"
+          width="300"
+          height="80"
+          class="h-16 w-auto"
+        />
+      </a>
+
+      <!-- Botón de menú móvil -->
+      <button id="mobile-menu-button" class="md:hidden p-2 rounded-md hover:bg-gray-100">
+        <svg xmlns="http://www.w3.org/2000/svg" class="menu-icon h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="close-icon h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Navegación escritorio -->
+      <nav class="hidden md:flex items-center gap-6">
+        {links.map(link => (
+          <a 
+            href={link.href} 
+            class={`text-sm font-medium hover:text-primary ${
+              currentPath === link.href ? 'text-primary' : ''
+            }`}
+          >
+            {link.name}
+          </a>
+        ))}
+        <a 
+          href="/login" 
+          class="text-sm font-medium border border-[#C22126] text-[#C22126] hover:bg-[#C22126] hover:text-white rounded-md py-2 px-4 transition-colors"
+        >
+          Iniciar Sesión
+        </a>
+      </nav>
+    </div>
+
+    <!-- Navegación móvil -->
+    <div id="mobile-menu" class="md:hidden mt-4 pb-4 hidden">
+      <nav class="flex flex-col space-y-4">
+        {links.map(link => (
+          <a 
+            href={link.href} 
+            class={`text-sm font-medium hover:text-primary py-2 ${
+              currentPath === link.href ? 'text-primary' : ''
+            }`}
+          >
+            {link.name}
+          </a>
+        ))}
+        <div class="py-2">
+          <a 
+            href="/login" 
+            class="text-sm font-medium border border-[#C22126] text-[#C22126] hover:bg-[#C22126] hover:text-white rounded-md py-2 px-4 w-full block text-center transition-colors"
+          >
+            Iniciar Sesión
+          </a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Toggle para menú móvil
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const menuIcon = document.querySelector('.menu-icon');
+  const closeIcon = document.querySelector('.close-icon');
+  
+  if (mobileMenuButton && mobileMenu && menuIcon && closeIcon) {
+    mobileMenuButton.addEventListener('click', () => {
+      const isHidden = mobileMenu.classList.contains('hidden');
+      
+      if (isHidden) {
+        mobileMenu.classList.remove('hidden');
+        menuIcon.classList.add('hidden');
+        closeIcon.classList.remove('hidden');
+      } else {
+        mobileMenu.classList.add('hidden');
+        menuIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+      }
+    });
+  }
+</script>

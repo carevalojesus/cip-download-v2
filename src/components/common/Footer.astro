@@ -1,0 +1,54 @@
+---
+const enlaces = [
+  { nombre: 'Trámites', href: '#' },
+  { nombre: 'Eventos', href: '/eventos' },
+  { nombre: 'Capacitaciones', href: '#' },
+  { nombre: 'Normativa', href: '#' },
+];
+
+// Año actual para el copyright
+const yearActual = new Date().getFullYear();
+---
+
+<footer class="border-t bg-muted/40">
+  <div class="container mx-auto px-4 py-8">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <h3 class="font-semibold text-lg mb-3">Colegio de Ingenieros del Perú</h3>
+        <p class="text-sm text-muted-foreground">Consejo Departamental de Loreto</p>
+        <p class="text-sm text-muted-foreground mt-2">Desde 1962 al servicio de la ingeniería peruana</p>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg mb-3">Enlaces Rápidos</h3>
+        <ul class="space-y-2">
+          {enlaces.map((enlace) => (
+            <li>
+              <a href={enlace.href} class="text-sm text-muted-foreground hover:text-primary">
+                {enlace.nombre}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold text-lg mb-3">Contacto</h3>
+        <address class="not-italic">
+          <p class="text-sm text-muted-foreground">Av. Abelardo Quiñones 3726</p>
+          <p class="text-sm text-muted-foreground">Iquitos, Loreto, Perú</p>
+          <p class="text-sm text-muted-foreground mt-2">Teléfono: (065) 234-567</p>
+          <p class="text-sm text-muted-foreground">
+            Email: <a href="mailto:info@cipconsejodepartamentalloreto.org.pe" class="hover:text-primary">
+              info@cipconsejodepartamentalloreto.org.pe
+            </a>
+          </p>
+        </address>
+      </div>
+    </div>
+    <div class="border-t mt-8 pt-6 text-center">
+      <p class="text-sm text-muted-foreground">
+        © {yearActual} Colegio de Ingenieros del Perú - Consejo Departamental de Loreto. Todos los
+        derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
